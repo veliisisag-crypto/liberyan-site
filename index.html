@@ -65,7 +65,8 @@
     font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;
     letter-spacing:0.12em;color:var(--ink);
   }
-  .nav-links{display:flex;gap:32px;font-size:14px;font-weight:500;}
+  .nav-right{display:flex;align-items:center;gap:18px;}
+  .nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;}
   .nav-links a{color:var(--muted);transition:color .15s;}
   .nav-links a:hover{color:var(--copper-light);}
   .nav-cta{
@@ -76,6 +77,14 @@
   }
   .nav-cta:hover{filter:brightness(1.08);}
   .nav-toggle{display:none;background:none;border:none;font-size:22px;cursor:pointer;color:var(--ink);}
+
+  .lang-switch{display:flex;align-items:center;gap:4px;background:rgba(0,0,0,0.2);border:1px solid var(--border-soft);border-radius:8px;padding:3px;}
+  .lang-btn{
+    background:none;border:none;color:var(--muted);padding:5px 11px;border-radius:6px;
+    cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.03em;
+    transition:background .15s,color .15s;
+  }
+  .lang-btn.active{color:#221D17;background:linear-gradient(135deg,var(--copper-light),var(--copper-dark));}
 
   .hero{padding:80px 0 68px;}
   .eyebrow{
@@ -125,7 +134,7 @@
     font-family:'Cormorant Garamond',serif;
     font-weight:600;color:var(--ink);font-size:16px;display:flex;align-items:center;
   }
-  .matrix-strip .cell .tier-price{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--copper-light);}
+  .matrix-strip .cell .amount{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--copper-light);}
 
   section{padding:72px 0;}
   .section-head{max-width:600px;margin-bottom:44px;}
@@ -157,7 +166,7 @@
   .tier-name{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
   .tier.is-pro .tier-name{color:var(--copper-light);}
   .tier-price{font-size:26px;font-weight:600;font-family:'IBM Plex Mono',monospace;margin-bottom:4px;color:var(--ink);}
-  .tier-price span{font-size:12.5px;font-weight:500;color:var(--muted);font-family:'Inter',sans-serif;}
+  .tier-price .period{font-size:12.5px;font-weight:500;color:var(--muted);font-family:'Inter',sans-serif;}
   .tier-sub{font-size:12.5px;color:var(--muted);margin-bottom:18px;}
   .tier ul{list-style:none;padding:0;margin:0 0 22px;flex:1;}
   .tier li{
@@ -232,47 +241,60 @@
       <span class="brand-name">LIBERYAN</span>
     </div>
     <nav class="nav-links">
-      <a href="#urunler">Ürünler</a>
-      <a href="#hakkimizda">Hakkımızda</a>
-      <a href="#iletisim">İletişim</a>
-      <a href="#iade">İade Politikası</a>
-      <a href="#kullanim-sartlari">Kullanım Şartları</a>
-      <a href="#gizlilik">Gizlilik</a>
+      <a href="#urunler"><span class="i18n" data-lang="tr">Ürünler</span><span class="i18n" data-lang="en" style="display:none">Products</span></a>
+      <a href="#hakkimizda"><span class="i18n" data-lang="tr">Hakkımızda</span><span class="i18n" data-lang="en" style="display:none">About</span></a>
+      <a href="#iletisim"><span class="i18n" data-lang="tr">İletişim</span><span class="i18n" data-lang="en" style="display:none">Contact</span></a>
+      <a href="#iade"><span class="i18n" data-lang="tr">İade Politikası</span><span class="i18n" data-lang="en" style="display:none">Refund Policy</span></a>
+      <a href="#kullanim-sartlari"><span class="i18n" data-lang="tr">Kullanım Şartları</span><span class="i18n" data-lang="en" style="display:none">Terms of Service</span></a>
+      <a href="#gizlilik"><span class="i18n" data-lang="tr">Gizlilik</span><span class="i18n" data-lang="en" style="display:none">Privacy</span></a>
     </nav>
-    <a class="nav-cta" href="#urunler">Fiyatları Gör</a>
-    <button class="nav-toggle" aria-label="Menü">☰</button>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button id="lang-btn-tr" class="lang-btn active" onclick="setLang('tr')">TR</button>
+        <button id="lang-btn-en" class="lang-btn" onclick="setLang('en')">EN</button>
+      </div>
+      <a class="nav-cta" href="#urunler"><span class="i18n" data-lang="tr">Fiyatları Gör</span><span class="i18n" data-lang="en" style="display:none">View Pricing</span></a>
+      <button class="nav-toggle" aria-label="Menü">☰</button>
+    </div>
   </div>
 </header>
 
 <section class="hero">
   <div class="wrap">
-    <span class="eyebrow">İşletme Yazılımları</span>
-    <h1>İki ürün ailesi. Altı sürüm. Tek lisans paneli.</h1>
-    <p class="lead">Liberyan, işletmelerin stok/ön muhasebe süreçlerini ve saha personeli ile lokasyon takibini
-      dijitalleştirmesi için geliştirilmiş, satın alma sonrası anında teslim edilen lisanslı yazılımlar sunar.</p>
+    <span class="eyebrow"><span class="i18n" data-lang="tr">İşletme Yazılımları</span><span class="i18n" data-lang="en" style="display:none">Business Software</span></span>
+    <h1>
+      <span class="i18n" data-lang="tr">İki ürün ailesi. Altı sürüm. Tek lisans paneli.</span>
+      <span class="i18n" data-lang="en" style="display:none">Two product families. Six editions. One license dashboard.</span>
+    </h1>
+    <p class="lead">
+      <span class="i18n" data-lang="tr">Liberyan, işletmelerin stok/ön muhasebe süreçlerini ve saha personeli ile lokasyon takibini
+        dijitalleştirmesi için geliştirilmiş, satın alma sonrası anında teslim edilen lisanslı yazılımlar sunar.</span>
+      <span class="i18n" data-lang="en" style="display:none">Liberyan builds licensed software that digitizes inventory/pre-accounting workflows and
+        field staff &amp; location tracking for businesses, delivered instantly after purchase.</span>
+    </p>
     <div class="hero-actions">
-      <a class="btn-primary" href="#urunler">Ürünleri İncele</a>
-      <a class="btn-secondary" href="#iletisim">Satış Ekibiyle Görüş</a>
+      <a class="btn-primary" href="#urunler"><span class="i18n" data-lang="tr">Ürünleri İncele</span><span class="i18n" data-lang="en" style="display:none">Explore Products</span></a>
+      <a class="btn-secondary" href="#iletisim"><span class="i18n" data-lang="tr">Satış Ekibiyle Görüş</span><span class="i18n" data-lang="en" style="display:none">Talk to Sales</span></a>
     </div>
 
     <div class="matrix-strip">
       <div class="row head">
-        <div class="cell">Ürün / Sürüm</div>
+        <div class="cell"><span class="i18n" data-lang="tr">Ürün / Sürüm</span><span class="i18n" data-lang="en" style="display:none">Product / Edition</span></div>
         <div class="cell">Basic</div>
         <div class="cell">Pro</div>
         <div class="cell">Enterprise</div>
       </div>
       <div class="row">
-        <div class="cell row-label">Liberyan Stok</div>
-        <div class="cell"><span class="tier-price">₺750</span></div>
-        <div class="cell"><span class="tier-price">₺1.500</span></div>
-        <div class="cell"><span class="tier-price">₺1.750</span></div>
+        <div class="cell row-label"><span class="i18n" data-lang="tr">Liberyan Stok</span><span class="i18n" data-lang="en" style="display:none">Liberyan Stock</span></div>
+        <div class="cell"><span class="amount" data-lira="₺750" data-usd="$16">₺750</span></div>
+        <div class="cell"><span class="amount" data-lira="₺1.500" data-usd="$32">₺1.500</span></div>
+        <div class="cell"><span class="amount" data-lira="₺1.750" data-usd="$38">₺1.750</span></div>
       </div>
       <div class="row">
-        <div class="cell row-label">Liberyan Saha</div>
-        <div class="cell"><span class="tier-price">₺2.000</span></div>
-        <div class="cell"><span class="tier-price">₺2.500</span></div>
-        <div class="cell"><span class="tier-price">₺3.000</span></div>
+        <div class="cell row-label"><span class="i18n" data-lang="tr">Liberyan Saha</span><span class="i18n" data-lang="en" style="display:none">Liberyan Field</span></div>
+        <div class="cell"><span class="amount" data-lira="₺2.000" data-usd="$43">₺2.000</span></div>
+        <div class="cell"><span class="amount" data-lira="₺2.500" data-usd="$54">₺2.500</span></div>
+        <div class="cell"><span class="amount" data-lira="₺3.000" data-usd="$64">₺3.000</span></div>
       </div>
     </div>
   </div>
@@ -281,60 +303,72 @@
 <section id="urunler">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Ürünler</span>
-      <h2>Lisans sürümleri</h2>
-      <p>Her iki ürün de üç kademede sunulur; ekip büyüklüğüne ve lokasyon sayısına göre yükseltme yapılabilir.
-        Tüm sürümler tek seferlik yıllık lisans bedeliyle satılır, kurulum dosyası ve lisans anahtarı satın
-        alma sonrası e-posta ile iletilir.</p>
+      <span class="eyebrow"><span class="i18n" data-lang="tr">Ürünler</span><span class="i18n" data-lang="en" style="display:none">Products</span></span>
+      <h2><span class="i18n" data-lang="tr">Lisans sürümleri</span><span class="i18n" data-lang="en" style="display:none">License Editions</span></h2>
+      <p>
+        <span class="i18n" data-lang="tr">Her iki ürün de üç kademede sunulur; ekip büyüklüğüne ve lokasyon sayısına göre yükseltme yapılabilir.
+          Tüm sürümler tek seferlik yıllık lisans bedeliyle satılır, kurulum dosyası ve lisans anahtarı satın
+          alma sonrası e-posta ile iletilir.</span>
+        <span class="i18n" data-lang="en" style="display:none">Both products come in three tiers, upgradeable based on team size and number of locations.
+          All editions are sold as a one-time annual license fee; the installer and license key are emailed
+          right after purchase.</span>
+      </p>
     </div>
 
     <div class="product-block">
       <div class="product-block-head">
         <div>
-          <span class="product-tag">Ürün 01</span>
-          <h3>Liberyan Stok — Stok Yönetimi ve Ön Muhasebe Sistemi</h3>
-          <p>Ürün/parti bazlı stok takibi, depo yönetimi, cari hesap ve tahsilat kayıtları ile
-            küçük ve orta ölçekli işletmeler için uçtan uca ön muhasebe akışı.</p>
+          <span class="product-tag"><span class="i18n" data-lang="tr">Ürün 01</span><span class="i18n" data-lang="en" style="display:none">Product 01</span></span>
+          <h3>
+            <span class="i18n" data-lang="tr">Liberyan Stok — Stok Yönetimi ve Ön Muhasebe Sistemi</span>
+            <span class="i18n" data-lang="en" style="display:none">Liberyan Stock — Inventory Management &amp; Pre-Accounting System</span>
+          </h3>
+          <p>
+            <span class="i18n" data-lang="tr">Ürün/parti bazlı stok takibi, depo yönetimi, cari hesap ve tahsilat kayıtları ile
+              küçük ve orta ölçekli işletmeler için uçtan uca ön muhasebe akışı.</span>
+            <span class="i18n" data-lang="en" style="display:none">Product/batch-level inventory tracking, warehouse management, accounts and collections —
+              a complete pre-accounting workflow for small and mid-sized businesses.</span>
+          </p>
         </div>
       </div>
       <div class="tiers">
         <div class="tier">
           <span class="tier-name">Basic</span>
-          <div class="tier-price">₺750 <span>/ yıllık</span></div>
-          <div class="tier-sub">Tek kullanıcı, tek depo</div>
+          <div class="tier-price"><span class="amount" data-lira="₺750" data-usd="$16">₺750</span> <span class="period"><span class="i18n" data-lang="tr">/ yıllık</span><span class="i18n" data-lang="en" style="display:none">/ yearly</span></span></div>
+          <div class="tier-sub"><span class="i18n" data-lang="tr">Tek kullanıcı, tek depo</span><span class="i18n" data-lang="en" style="display:none">Single user, single warehouse</span></div>
           <ul>
-            <li>Ürün ve stok kartı yönetimi</li>
-            <li>Giriş / çıkış hareket takibi</li>
-            <li>Temel stok raporları</li>
-            <li>E-posta destek</li>
+            <li><span class="i18n" data-lang="tr">Ürün ve stok kartı yönetimi</span><span class="i18n" data-lang="en" style="display:none">Product &amp; stock card management</span></li>
+            <li><span class="i18n" data-lang="tr">Giriş / çıkış hareket takibi</span><span class="i18n" data-lang="en" style="display:none">Inbound/outbound movement tracking</span></li>
+            <li><span class="i18n" data-lang="tr">Temel stok raporları</span><span class="i18n" data-lang="en" style="display:none">Basic stock reports</span></li>
+            <li><span class="i18n" data-lang="tr">E-posta destek</span><span class="i18n" data-lang="en" style="display:none">Email support</span></li>
           </ul>
-          <a class="tier-cta" href="#iletisim">Lisans Satın Al</a>
+          <a class="tier-cta" href="#iletisim"><span class="i18n" data-lang="tr">Lisans Satın Al</span><span class="i18n" data-lang="en" style="display:none">Buy License</span></a>
         </div>
         <div class="tier is-pro">
           <span class="tier-name">Pro</span>
-          <div class="tier-price">₺1.500 <span>/ yıllık</span></div>
-          <div class="tier-sub">5 kullanıcıya kadar, çoklu depo</div>
+          <div class="tier-price"><span class="amount" data-lira="₺1.500" data-usd="$32">₺1.500</span> <span class="period"><span class="i18n" data-lang="tr">/ yıllık</span><span class="i18n" data-lang="en" style="display:none">/ yearly</span></span></div>
+          <div class="tier-sub"><span class="i18n" data-lang="tr">5 kullanıcıya kadar, çoklu depo</span><span class="i18n" data-lang="en" style="display:none">Up to 5 users, multiple warehouses</span></div>
           <ul>
-            <li>Basic sürümünün tüm özellikleri</li>
-            <li>Çoklu depo / lokasyon desteği</li>
-            <li>Cari hesap ve tahsilat takibi</li>
-            <li>Dönemsel kâr / kapanış raporları</li>
-            <li>Öncelikli e-posta destek</li>
+            <li><span class="i18n" data-lang="tr">Basic sürümünün tüm özellikleri</span><span class="i18n" data-lang="en" style="display:none">Everything in Basic</span></li>
+            <li><span class="i18n" data-lang="tr">Çoklu depo / lokasyon desteği</span><span class="i18n" data-lang="en" style="display:none">Multi-warehouse / location support</span></li>
+            <li><span class="i18n" data-lang="tr">Cari hesap ve tahsilat takibi</span><span class="i18n" data-lang="en" style="display:none">Accounts and collections tracking</span></li>
+            <li><span class="i18n" data-lang="tr">Dönemsel kâr / kapanış raporları</span><span class="i18n" data-lang="en" style="display:none">Periodic profit &amp; closing reports</span></li>
+            <li><span class="i18n" data-lang="tr">Öncelikli e-posta destek</span><span class="i18n" data-lang="en" style="display:none">Priority email support</span></li>
           </ul>
-          <a class="tier-cta" href="#iletisim">Lisans Satın Al</a>
+          <a class="tier-cta" href="#iletisim"><span class="i18n" data-lang="tr">Lisans Satın Al</span><span class="i18n" data-lang="en" style="display:none">Buy License</span></a>
         </div>
         <div class="tier">
           <span class="tier-name">Enterprise</span>
-          <div class="tier-price">₺1.750 <span>/ yıllık</span></div>
-          <div class="tier-sub">Sınırsız kullanıcı, API erişimi</div>
+          <div class="tier-price"><span class="amount" data-lira="₺1.750" data-usd="$38">₺1.750</span> <span class="period"><span class="i18n" data-lang="tr">/ yıllık</span><span class="i18n" data-lang="en" style="display:none">/ yearly</span></span></div>
+          <div class="tier-sub"><span class="i18n" data-lang="tr">Sınırsız kullanıcı, API erişimi</span><span class="i18n" data-lang="en" style="display:none">Unlimited users, API access</span></div>
           <ul>
-            <li>Pro sürümünün tüm özellikleri</li>
-            <li>Sınırsız kullanıcı ve depo</li>
-            <li>API erişimi ve özel entegrasyon</li>
-            <li>Rol bazlı yetkilendirme</li>
-            <li>Öncelikli destek ve SLA</li>
+            <li><span class="i18n" data-lang="tr">Pro sürümünün tüm özellikleri</span><span class="i18n" data-lang="en" style="display:none">Everything in Pro</span></li>
+            <li><span class="i18n" data-lang="tr">Sınırsız kullanıcı ve depo</span><span class="i18n" data-lang="en" style="display:none">Unlimited users and warehouses</span></li>
+            <li><span class="i18n" data-lang="tr">API erişimi ve özel entegrasyon</span><span class="i18n" data-lang="en" style="display:none">API access and custom integration</span></li>
+            <li><span class="i18n" data-lang="tr">Rol bazlı yetkilendirme</span><span class="i18n" data-lang="en" style="display:none">Role-based permissions</span></li>
+            <li><span class="i18n" data-lang="tr">Öncelikli destek ve SLA</span><span class="i18n" data-lang="en" style="display:none">Priority support and SLA</span></li>
           </ul>
-          <a class="tier-cta" href="#iletisim">Lisans Satın Al</a>
+          <a class="tier-cta" href="#iletisim"><span class="i18n" data-lang="tr">Lisans Satın Al</span><span class="i18n" data-lang="en" style="display:none">Buy License</span></a>
         </div>
       </div>
     </div>
@@ -342,50 +376,57 @@
     <div class="product-block">
       <div class="product-block-head">
         <div>
-          <span class="product-tag">Ürün 02</span>
-          <h3>Liberyan Saha — QR Kod ile Lokasyon ve Personel İş Takip Sistemi</h3>
-          <p>Personelin QR kod okutarak lokasyon bazlı giriş/çıkış ve görev tamamlama kaydı bıraktığı,
-            yöneticilerin gerçek zamanlı takip yaptığı saha yönetim yazılımı.</p>
+          <span class="product-tag"><span class="i18n" data-lang="tr">Ürün 02</span><span class="i18n" data-lang="en" style="display:none">Product 02</span></span>
+          <h3>
+            <span class="i18n" data-lang="tr">Liberyan Saha — QR Kod ile Lokasyon ve Personel İş Takip Sistemi</span>
+            <span class="i18n" data-lang="en" style="display:none">Liberyan Field — QR Code Location &amp; Staff Tracking System</span>
+          </h3>
+          <p>
+            <span class="i18n" data-lang="tr">Personelin QR kod okutarak lokasyon bazlı giriş/çıkış ve görev tamamlama kaydı bıraktığı,
+              yöneticilerin gerçek zamanlı takip yaptığı saha yönetim yazılımı.</span>
+            <span class="i18n" data-lang="en" style="display:none">Field management software where staff scan QR codes to log location-based check-ins and
+              task completions, while managers track everything in real time.</span>
+          </p>
         </div>
       </div>
       <div class="tiers">
         <div class="tier">
           <span class="tier-name">Basic</span>
-          <div class="tier-price">₺2.000 <span>/ yıllık</span></div>
-          <div class="tier-sub">Tek lokasyon</div>
+          <div class="tier-price"><span class="amount" data-lira="₺2.000" data-usd="$43">₺2.000</span> <span class="period"><span class="i18n" data-lang="tr">/ yıllık</span><span class="i18n" data-lang="en" style="display:none">/ yearly</span></span></div>
+          <div class="tier-sub"><span class="i18n" data-lang="tr">Tek lokasyon</span><span class="i18n" data-lang="en" style="display:none">Single location</span></div>
           <ul>
-            <li>QR kod ile giriş / çıkış kaydı</li>
-            <li>Tekil lokasyon takibi</li>
-            <li>Temel görev listesi</li>
-            <li>E-posta destek</li>
+            <li><span class="i18n" data-lang="tr">QR kod ile giriş / çıkış kaydı</span><span class="i18n" data-lang="en" style="display:none">QR code check-in / check-out logging</span></li>
+            <li><span class="i18n" data-lang="tr">Tekil lokasyon takibi</span><span class="i18n" data-lang="en" style="display:none">Single-location tracking</span></li>
+            <li><span class="i18n" data-lang="tr">Temel görev listesi</span><span class="i18n" data-lang="en" style="display:none">Basic task list</span></li>
+            <li><span class="i18n" data-lang="tr">E-posta destek</span><span class="i18n" data-lang="en" style="display:none">Email support</span></li>
           </ul>
-          <a class="tier-cta" href="#iletisim">Lisans Satın Al</a>
+          <a class="tier-cta" href="#iletisim"><span class="i18n" data-lang="tr">Lisans Satın Al</span><span class="i18n" data-lang="en" style="display:none">Buy License</span></a>
         </div>
         <div class="tier is-pro">
           <span class="tier-name">Pro</span>
-          <div class="tier-price">₺2.500 <span>/ yıllık</span></div>
-          <div class="tier-sub">Çoklu lokasyon, vardiya planlama</div>
+          <div class="tier-price"><span class="amount" data-lira="₺2.500" data-usd="$54">₺2.500</span> <span class="period"><span class="i18n" data-lang="tr">/ yıllık</span><span class="i18n" data-lang="en" style="display:none">/ yearly</span></span></div>
+          <div class="tier-sub"><span class="i18n" data-lang="tr">Çoklu lokasyon, vardiya planlama</span><span class="i18n" data-lang="en" style="display:none">Multiple locations, shift planning</span></div>
           <ul>
-            <li>Basic sürümünün tüm özellikleri</li>
-            <li>Çoklu lokasyon yönetimi</li>
-            <li>Personel bazlı görev atama</li>
-            <li>Vardiya planlama ve bildirimler</li>
-            <li>Öncelikli e-posta destek</li>
+            <li><span class="i18n" data-lang="tr">Basic sürümünün tüm özellikleri</span><span class="i18n" data-lang="en" style="display:none">Everything in Basic</span></li>
+            <li><span class="i18n" data-lang="tr">Çoklu lokasyon yönetimi</span><span class="i18n" data-lang="en" style="display:none">Multi-location management</span></li>
+            <li><span class="i18n" data-lang="tr">Personel bazlı görev atama</span><span class="i18n" data-lang="en" style="display:none">Staff-based task assignment</span></li>
+            <li><span class="i18n" data-lang="tr">Vardiya planlama ve bildirimler</span><span class="i18n" data-lang="en" style="display:none">Shift planning and notifications</span></li>
+            <li><span class="i18n" data-lang="tr">Öncelikli e-posta destek</span><span class="i18n" data-lang="en" style="display:none">Priority email support</span></li>
           </ul>
-          <a class="tier-cta" href="#iletisim">Lisans Satın Al</a>
+          <a class="tier-cta" href="#iletisim"><span class="i18n" data-lang="tr">Lisans Satın Al</span><span class="i18n" data-lang="en" style="display:none">Buy License</span></a>
         </div>
         <div class="tier">
           <span class="tier-name">Enterprise</span>
-          <div class="tier-price">₺3.000 <span>/ yıllık</span></div>
-          <div class="tier-sub">Sınırsız lokasyon ve personel</div>
+          <div class="tier-price"><span class="amount" data-lira="₺3.000" data-usd="$64">₺3.000</span> <span class="period"><span class="i18n" data-lang="tr">/ yıllık</span><span class="i18n" data-lang="en" style="display:none">/ yearly</span></span></div>
+          <div class="tier-sub"><span class="i18n" data-lang="tr">Sınırsız lokasyon ve personel</span><span class="i18n" data-lang="en" style="display:none">Unlimited locations and staff</span></div>
           <ul>
-            <li>Pro sürümünün tüm özellikleri</li>
-            <li>Sınırsız lokasyon / personel</li>
-            <li>Denetim kaydı ve log raporları</li>
-            <li>Özel entegrasyon desteği</li>
-            <li>Öncelikli destek ve SLA</li>
+            <li><span class="i18n" data-lang="tr">Pro sürümünün tüm özellikleri</span><span class="i18n" data-lang="en" style="display:none">Everything in Pro</span></li>
+            <li><span class="i18n" data-lang="tr">Sınırsız lokasyon / personel</span><span class="i18n" data-lang="en" style="display:none">Unlimited locations / staff</span></li>
+            <li><span class="i18n" data-lang="tr">Denetim kaydı ve log raporları</span><span class="i18n" data-lang="en" style="display:none">Audit trail and log reports</span></li>
+            <li><span class="i18n" data-lang="tr">Özel entegrasyon desteği</span><span class="i18n" data-lang="en" style="display:none">Custom integration support</span></li>
+            <li><span class="i18n" data-lang="tr">Öncelikli destek ve SLA</span><span class="i18n" data-lang="en" style="display:none">Priority support and SLA</span></li>
           </ul>
-          <a class="tier-cta" href="#iletisim">Lisans Satın Al</a>
+          <a class="tier-cta" href="#iletisim"><span class="i18n" data-lang="tr">Lisans Satın Al</span><span class="i18n" data-lang="en" style="display:none">Buy License</span></a>
         </div>
       </div>
     </div>
@@ -395,25 +436,39 @@
 <section id="hakkimizda">
   <div class="wrap about-grid">
     <div>
-      <span class="eyebrow">Hakkımızda</span>
-      <h2>Liberyan, işletme içi süreçleri sadeleştiren yazılımlar geliştirir.</h2>
+      <span class="eyebrow"><span class="i18n" data-lang="tr">Hakkımızda</span><span class="i18n" data-lang="en" style="display:none">About</span></span>
+      <h2>
+        <span class="i18n" data-lang="tr">Liberyan, işletme içi süreçleri sadeleştiren yazılımlar geliştirir.</span>
+        <span class="i18n" data-lang="en" style="display:none">Liberyan builds software that simplifies internal business processes.</span>
+      </h2>
       <p style="color:var(--muted);font-size:15.5px;max-width:520px;">
-        Küçük ve orta ölçekli işletmelerin stok, ön muhasebe ve saha personeli yönetimi ihtiyaçlarına
-        odaklanan bağımsız bir yazılım geliştiricisiyiz. Ürünlerimiz doğrudan kullanıma hazır, kurulum sonrası
-        hızlı devreye alınan lisanslı masaüstü/web tabanlı sistemlerdir.
+        <span class="i18n" data-lang="tr">Küçük ve orta ölçekli işletmelerin stok, ön muhasebe ve saha personeli yönetimi ihtiyaçlarına
+          odaklanan bağımsız bir yazılım geliştiricisiyiz. Ürünlerimiz doğrudan kullanıma hazır, kurulum sonrası
+          hızlı devreye alınan lisanslı masaüstü/web tabanlı sistemlerdir.</span>
+        <span class="i18n" data-lang="en" style="display:none">We're an independent software developer focused on the inventory, pre-accounting, and field
+          staff management needs of small and mid-sized businesses. Our products are ready to use out of the box —
+          licensed desktop/web systems that go live quickly after installation.</span>
       </p>
       <div class="stat-row">
-        <div class="stat"><b>2</b><span>Ürün ailesi</span></div>
-        <div class="stat"><b>6</b><span>Lisans sürümü</span></div>
-        <div class="stat"><b>7/24</b><span>Lisans teslim sistemi</span></div>
+        <div class="stat"><b>2</b><span><span class="i18n" data-lang="tr">Ürün ailesi</span><span class="i18n" data-lang="en" style="display:none">Product families</span></span></div>
+        <div class="stat"><b>6</b><span><span class="i18n" data-lang="tr">Lisans sürümü</span><span class="i18n" data-lang="en" style="display:none">License editions</span></span></div>
+        <div class="stat"><b>7/24</b><span><span class="i18n" data-lang="tr">Lisans teslim sistemi</span><span class="i18n" data-lang="en" style="display:none">License delivery system</span></span></div>
       </div>
     </div>
     <div class="about-card">
-      <h4>Nasıl çalışır?</h4>
-      <p style="margin-bottom:14px;">1. Uygun sürümü seçip kredi kartıyla ödeme yaparsınız.<br>
-      2. Lisans anahtarı ve kurulum bağlantısı e-posta ile gönderilir.<br>
-      3. Kurulum sonrası destek e-posta üzerinden sağlanır.</p>
-      <p style="margin:0;">Kargo veya fiziksel teslimat yoktur; tüm ürünler dijital olarak teslim edilir.</p>
+      <h4><span class="i18n" data-lang="tr">Nasıl çalışır?</span><span class="i18n" data-lang="en" style="display:none">How it works?</span></h4>
+      <p style="margin-bottom:14px;">
+        <span class="i18n" data-lang="tr">1. Uygun sürümü seçip kredi kartıyla ödeme yaparsınız.<br>
+        2. Lisans anahtarı ve kurulum bağlantısı e-posta ile gönderilir.<br>
+        3. Kurulum sonrası destek e-posta üzerinden sağlanır.</span>
+        <span class="i18n" data-lang="en" style="display:none">1. Choose the right edition and pay by credit card.<br>
+        2. The license key and installer link are emailed to you.<br>
+        3. Support is provided by email after installation.</span>
+      </p>
+      <p style="margin:0;">
+        <span class="i18n" data-lang="tr">Kargo veya fiziksel teslimat yoktur; tüm ürünler dijital olarak teslim edilir.</span>
+        <span class="i18n" data-lang="en" style="display:none">There is no shipping or physical delivery; all products are delivered digitally.</span>
+      </p>
     </div>
   </div>
 </section>
@@ -421,20 +476,38 @@
 <section id="iletisim">
   <div class="wrap split">
     <div class="info-card">
-      <h3>İletişim</h3>
-      <p>Satış öncesi sorularınız, lisans yükseltme talepleriniz veya teknik destek için bize e-posta ile
-        ulaşabilirsiniz.</p>
+      <h3><span class="i18n" data-lang="tr">İletişim</span><span class="i18n" data-lang="en" style="display:none">Contact</span></h3>
+      <p>
+        <span class="i18n" data-lang="tr">Satış öncesi sorularınız, lisans yükseltme talepleriniz veya teknik destek için bize e-posta ile
+          ulaşabilirsiniz.</span>
+        <span class="i18n" data-lang="en" style="display:none">For pre-sales questions, license upgrade requests, or technical support, reach us by email.</span>
+      </p>
       <div class="info-row"><span class="icon">@</span> kaansubstation@yaho.com</div>
       <div class="info-row"><span class="icon">W</span> liberyan.com</div>
-      <p style="margin-top:18px;font-size:13px;">Ortalama yanıt süresi: 1 iş günü içinde.</p>
+      <p style="margin-top:18px;font-size:13px;">
+        <span class="i18n" data-lang="tr">Ortalama yanıt süresi: 1 iş günü içinde.</span>
+        <span class="i18n" data-lang="en" style="display:none">Average response time: within 1 business day.</span>
+      </p>
     </div>
     <div class="info-card" id="iade">
-      <h3>İade Politikası</h3>
+      <h3><span class="i18n" data-lang="tr">İade Politikası</span><span class="i18n" data-lang="en" style="display:none">Refund Policy</span></h3>
       <ul class="policy-list">
-        <li>Lisans anahtarı henüz aktive edilmemişse satın alma tarihinden itibaren 14 gün içinde koşulsuz iade yapılır.</li>
-        <li>Lisans aktivasyonu yapıldıktan sonra iade yerine öncelikli teknik destek sağlanır.</li>
-        <li>Yanlış sürüm satın alındığında ücret farkı ödenerek sürüm değişikliği yapılabilir.</li>
-        <li>İade talepleri kaansubstation@yaho.com adresine sipariş numarasıyla iletilmelidir.</li>
+        <li>
+          <span class="i18n" data-lang="tr">Lisans anahtarı henüz aktive edilmemişse satın alma tarihinden itibaren 14 gün içinde koşulsuz iade yapılır.</span>
+          <span class="i18n" data-lang="en" style="display:none">If the license key has not yet been activated, a full refund is available within 14 days of purchase.</span>
+        </li>
+        <li>
+          <span class="i18n" data-lang="tr">Lisans aktivasyonu yapıldıktan sonra iade yerine öncelikli teknik destek sağlanır.</span>
+          <span class="i18n" data-lang="en" style="display:none">Once the license has been activated, priority technical support is provided instead of a refund.</span>
+        </li>
+        <li>
+          <span class="i18n" data-lang="tr">Yanlış sürüm satın alındığında ücret farkı ödenerek sürüm değişikliği yapılabilir.</span>
+          <span class="i18n" data-lang="en" style="display:none">If the wrong edition was purchased, you can switch editions by paying the price difference.</span>
+        </li>
+        <li>
+          <span class="i18n" data-lang="tr">İade talepleri kaansubstation@yaho.com adresine sipariş numarasıyla iletilmelidir.</span>
+          <span class="i18n" data-lang="en" style="display:none">Refund requests should be sent to kaansubstation@yaho.com along with your order number.</span>
+        </li>
       </ul>
     </div>
   </div>
@@ -443,53 +516,124 @@
 <section id="yasal">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Yasal</span>
-      <h2>Kullanım şartları &amp; gizlilik</h2>
-      <p>Liberyan lisanslarını satın alarak aşağıdaki kullanım şartlarını ve gizlilik politikasını kabul etmiş
-        sayılırsınız. Ödeme işlemleri güvenli ödeme ortağımız üzerinden gerçekleştirilir.</p>
+      <span class="eyebrow"><span class="i18n" data-lang="tr">Yasal</span><span class="i18n" data-lang="en" style="display:none">Legal</span></span>
+      <h2>
+        <span class="i18n" data-lang="tr">Kullanım şartları &amp; gizlilik</span>
+        <span class="i18n" data-lang="en" style="display:none">Terms of Service &amp; Privacy</span>
+      </h2>
+      <p>
+        <span class="i18n" data-lang="tr">Liberyan lisanslarını satın alarak aşağıdaki kullanım şartlarını ve gizlilik politikasını kabul etmiş
+          sayılırsınız. Ödeme işlemleri güvenli ödeme ortağımız üzerinden gerçekleştirilir.</span>
+        <span class="i18n" data-lang="en" style="display:none">By purchasing a Liberyan license, you agree to the terms of service and privacy policy below.
+          Payments are processed through our secure payment partner.</span>
+      </p>
     </div>
     <div class="split">
       <div class="info-card" id="kullanim-sartlari">
-        <h3>Kullanım Şartları</h3>
-        <p style="margin-bottom:14px;"><strong style="color:var(--ink);">1. Taraflar ve Kapsam</strong><br>
-          Bu şartlar, Liberyan tarafından geliştirilen "Liberyan Stok" ve "Liberyan Saha" yazılımlarının
-          lisans satın alımı ve kullanımına ilişkin koşulları düzenler.</p>
-        <p style="margin-bottom:14px;"><strong style="color:var(--ink);">2. Lisans Kapsamı</strong><br>
-          Satın alınan lisans, seçilen sürümde (Basic/Pro/Enterprise) belirtilen kullanıcı/lokasyon sınırları
-          dahilinde, tek bir işletme bünyesinde kullanım hakkı tanır. Lisansın üçüncü taraflara devri, yeniden
-          satışı veya çoğaltılması önceden yazılı izin olmadan yasaktır.</p>
-        <p style="margin-bottom:14px;"><strong style="color:var(--ink);">3. Ödeme ve Faturalama</strong><br>
-          Ödemeler, yetkili ödeme sağlayıcımız (Paddle.com Market Limited) aracılığıyla işlenir. Fatura ve
-          vergi mükellefiyeti bu ödeme sağlayıcısı tarafından yürütülür; kredi kartı bilgileriniz Liberyan
-          tarafından görülmez veya saklanmaz.</p>
-        <p style="margin-bottom:14px;"><strong style="color:var(--ink);">4. Fikri Mülkiyet</strong><br>
-          Yazılımların kaynak kodu, tasarımı ve ilgili tüm fikri mülkiyet hakları Liberyan'a aittir. Lisans
-          satışı, mülkiyet devri anlamına gelmez; yalnızca kullanım hakkı tanınır.</p>
-        <p style="margin-bottom:14px;"><strong style="color:var(--ink);">5. Sorumluluk Sınırlaması</strong><br>
-          Yazılımlar "olduğu gibi" sunulur. Liberyan, yazılımın kullanımından doğabilecek dolaylı zararlardan
-          sorumlu tutulamaz.</p>
-        <p style="margin:0;"><strong style="color:var(--ink);">6. Uygulanacak Hukuk</strong><br>
-          Bu şartlar Türkiye Cumhuriyeti kanunlarına tabidir; uyuşmazlıklarda Türkiye mahkemeleri yetkilidir.</p>
+        <h3><span class="i18n" data-lang="tr">Kullanım Şartları</span><span class="i18n" data-lang="en" style="display:none">Terms of Service</span></h3>
+
+        <p style="margin-bottom:14px;">
+          <span class="i18n" data-lang="tr"><strong style="color:var(--ink);">1. Taraflar ve Kapsam</strong><br>
+            Bu şartlar, Liberyan tarafından geliştirilen "Liberyan Stok" ve "Liberyan Saha" yazılımlarının
+            lisans satın alımı ve kullanımına ilişkin koşulları düzenler.</span>
+          <span class="i18n" data-lang="en" style="display:none"><strong style="color:var(--ink);">1. Parties and Scope</strong><br>
+            These terms govern the purchase and use of licenses for Liberyan's "Liberyan Stock" and
+            "Liberyan Field" software.</span>
+        </p>
+        <p style="margin-bottom:14px;">
+          <span class="i18n" data-lang="tr"><strong style="color:var(--ink);">2. Lisans Kapsamı</strong><br>
+            Satın alınan lisans, seçilen sürümde (Basic/Pro/Enterprise) belirtilen kullanıcı/lokasyon sınırları
+            dahilinde, tek bir işletme bünyesinde kullanım hakkı tanır. Lisansın üçüncü taraflara devri, yeniden
+            satışı veya çoğaltılması önceden yazılı izin olmadan yasaktır.</span>
+          <span class="i18n" data-lang="en" style="display:none"><strong style="color:var(--ink);">2. License Scope</strong><br>
+            The purchased license grants usage rights within a single business, subject to the user/location
+            limits of the selected edition (Basic/Pro/Enterprise). Transferring, reselling, or duplicating the
+            license without prior written consent is prohibited.</span>
+        </p>
+        <p style="margin-bottom:14px;">
+          <span class="i18n" data-lang="tr"><strong style="color:var(--ink);">3. Ödeme ve Faturalama</strong><br>
+            Ödemeler, yetkili ödeme sağlayıcımız (Paddle.com Market Limited) aracılığıyla işlenir. Fatura ve
+            vergi mükellefiyeti bu ödeme sağlayıcısı tarafından yürütülür; kredi kartı bilgileriniz Liberyan
+            tarafından görülmez veya saklanmaz.</span>
+          <span class="i18n" data-lang="en" style="display:none"><strong style="color:var(--ink);">3. Payment and Billing</strong><br>
+            Payments are processed through our authorized payment provider (Paddle.com Market Limited).
+            Invoicing and tax obligations are handled by this payment provider; your credit card details are
+            never seen or stored by Liberyan.</span>
+        </p>
+        <p style="margin-bottom:14px;">
+          <span class="i18n" data-lang="tr"><strong style="color:var(--ink);">4. Fikri Mülkiyet</strong><br>
+            Yazılımların kaynak kodu, tasarımı ve ilgili tüm fikri mülkiyet hakları Liberyan'a aittir. Lisans
+            satışı, mülkiyet devri anlamına gelmez; yalnızca kullanım hakkı tanınır.</span>
+          <span class="i18n" data-lang="en" style="display:none"><strong style="color:var(--ink);">4. Intellectual Property</strong><br>
+            The source code, design, and all related intellectual property rights of the software belong to
+            Liberyan. A license sale does not transfer ownership; it grants a usage right only.</span>
+        </p>
+        <p style="margin-bottom:14px;">
+          <span class="i18n" data-lang="tr"><strong style="color:var(--ink);">5. Sorumluluk Sınırlaması</strong><br>
+            Yazılımlar "olduğu gibi" sunulur. Liberyan, yazılımın kullanımından doğabilecek dolaylı zararlardan
+            sorumlu tutulamaz.</span>
+          <span class="i18n" data-lang="en" style="display:none"><strong style="color:var(--ink);">5. Limitation of Liability</strong><br>
+            The software is provided "as is." Liberyan cannot be held liable for any indirect damages arising
+            from the use of the software.</span>
+        </p>
+        <p style="margin:0;">
+          <span class="i18n" data-lang="tr"><strong style="color:var(--ink);">6. Uygulanacak Hukuk</strong><br>
+            Bu şartlar Türkiye Cumhuriyeti kanunlarına tabidir; uyuşmazlıklarda Türkiye mahkemeleri yetkilidir.</span>
+          <span class="i18n" data-lang="en" style="display:none"><strong style="color:var(--ink);">6. Governing Law</strong><br>
+            These terms are governed by the laws of the Republic of Turkey; Turkish courts have jurisdiction
+            over any disputes.</span>
+        </p>
       </div>
+
       <div class="info-card" id="gizlilik">
-        <h3>Gizlilik Politikası</h3>
-        <p style="margin-bottom:14px;"><strong style="color:var(--ink);">1. Toplanan Veriler</strong><br>
-          Lisans satın alma sürecinde ad, e-posta adresi ve fatura bilgileriniz ödeme sağlayıcımız tarafından
-          toplanır. Liberyan olarak yalnızca lisans teslimi ve destek amacıyla e-posta adresinizi tutarız.</p>
-        <p style="margin-bottom:14px;"><strong style="color:var(--ink);">2. Kullanım Amacı</strong><br>
-          Toplanan veriler; lisans anahtarı teslimi, teknik destek sağlama, iade/değişim taleplerinin
-          yönetimi ve yasal yükümlülüklerin yerine getirilmesi amacıyla kullanılır.</p>
-        <p style="margin-bottom:14px;"><strong style="color:var(--ink);">3. Üçüncü Taraflarla Paylaşım</strong><br>
-          Ödeme bilgileriniz yalnızca ödeme sağlayıcımızla paylaşılır. Verileriniz pazarlama amacıyla üçüncü
-          taraflara satılmaz veya kiralanmaz.</p>
-        <p style="margin-bottom:14px;"><strong style="color:var(--ink);">4. Veri Güvenliği</strong><br>
-          Kredi kartı bilgileri Liberyan sunucularında hiçbir şekilde saklanmaz; tüm ödeme işlemleri PCI-DSS
-          uyumlu ödeme sağlayıcımız üzerinden şifreli olarak gerçekleştirilir.</p>
-        <p style="margin-bottom:14px;"><strong style="color:var(--ink);">5. Haklarınız</strong><br>
-          Kişisel verilerinize erişme, düzeltme veya silinmesini talep etme hakkına sahipsiniz. Bu talepleri
-          kaansubstation@yaho.com adresine iletebilirsiniz.</p>
-        <p style="margin:0;"><strong style="color:var(--ink);">6. İletişim</strong><br>
-          Gizlilikle ilgili sorularınız için: kaansubstation@yaho.com</p>
+        <h3><span class="i18n" data-lang="tr">Gizlilik Politikası</span><span class="i18n" data-lang="en" style="display:none">Privacy Policy</span></h3>
+
+        <p style="margin-bottom:14px;">
+          <span class="i18n" data-lang="tr"><strong style="color:var(--ink);">1. Toplanan Veriler</strong><br>
+            Lisans satın alma sürecinde ad, e-posta adresi ve fatura bilgileriniz ödeme sağlayıcımız tarafından
+            toplanır. Liberyan olarak yalnızca lisans teslimi ve destek amacıyla e-posta adresinizi tutarız.</span>
+          <span class="i18n" data-lang="en" style="display:none"><strong style="color:var(--ink);">1. Data We Collect</strong><br>
+            During license purchase, your name, email address, and billing details are collected by our payment
+            provider. Liberyan only retains your email address for license delivery and support purposes.</span>
+        </p>
+        <p style="margin-bottom:14px;">
+          <span class="i18n" data-lang="tr"><strong style="color:var(--ink);">2. Kullanım Amacı</strong><br>
+            Toplanan veriler; lisans anahtarı teslimi, teknik destek sağlama, iade/değişim taleplerinin
+            yönetimi ve yasal yükümlülüklerin yerine getirilmesi amacıyla kullanılır.</span>
+          <span class="i18n" data-lang="en" style="display:none"><strong style="color:var(--ink);">2. Purpose of Use</strong><br>
+            The data collected is used to deliver license keys, provide technical support, manage
+            refund/exchange requests, and fulfill legal obligations.</span>
+        </p>
+        <p style="margin-bottom:14px;">
+          <span class="i18n" data-lang="tr"><strong style="color:var(--ink);">3. Üçüncü Taraflarla Paylaşım</strong><br>
+            Ödeme bilgileriniz yalnızca ödeme sağlayıcımızla paylaşılır. Verileriniz pazarlama amacıyla üçüncü
+            taraflara satılmaz veya kiralanmaz.</span>
+          <span class="i18n" data-lang="en" style="display:none"><strong style="color:var(--ink);">3. Sharing with Third Parties</strong><br>
+            Your payment information is only shared with our payment provider. Your data is never sold or
+            rented to third parties for marketing purposes.</span>
+        </p>
+        <p style="margin-bottom:14px;">
+          <span class="i18n" data-lang="tr"><strong style="color:var(--ink);">4. Veri Güvenliği</strong><br>
+            Kredi kartı bilgileri Liberyan sunucularında hiçbir şekilde saklanmaz; tüm ödeme işlemleri PCI-DSS
+            uyumlu ödeme sağlayıcımız üzerinden şifreli olarak gerçekleştirilir.</span>
+          <span class="i18n" data-lang="en" style="display:none"><strong style="color:var(--ink);">4. Data Security</strong><br>
+            Credit card information is never stored on Liberyan servers; all payments are processed securely
+            through our PCI-DSS compliant payment provider.</span>
+        </p>
+        <p style="margin-bottom:14px;">
+          <span class="i18n" data-lang="tr"><strong style="color:var(--ink);">5. Haklarınız</strong><br>
+            Kişisel verilerinize erişme, düzeltme veya silinmesini talep etme hakkına sahipsiniz. Bu talepleri
+            kaansubstation@yaho.com adresine iletebilirsiniz.</span>
+          <span class="i18n" data-lang="en" style="display:none"><strong style="color:var(--ink);">5. Your Rights</strong><br>
+            You have the right to access, correct, or request deletion of your personal data. You can send
+            such requests to kaansubstation@yaho.com.</span>
+        </p>
+        <p style="margin:0;">
+          <span class="i18n" data-lang="tr"><strong style="color:var(--ink);">6. İletişim</strong><br>
+            Gizlilikle ilgili sorularınız için: kaansubstation@yaho.com</span>
+          <span class="i18n" data-lang="en" style="display:none"><strong style="color:var(--ink);">6. Contact</strong><br>
+            For privacy-related questions: kaansubstation@yaho.com</span>
+        </p>
       </div>
     </div>
   </div>
@@ -499,16 +643,39 @@
   <div class="wrap footer-row">
     <div class="footer-brand"><img src="assets/liberyan-logo.jpg" alt="Liberyan"><span>Liberyan</span></div>
     <div class="footer-links">
-      <a href="#urunler">Ürünler</a>
-      <a href="#hakkimizda">Hakkımızda</a>
-      <a href="#iade">İade Politikası</a>
-      <a href="#kullanim-sartlari">Kullanım Şartları</a>
-      <a href="#gizlilik">Gizlilik</a>
-      <a href="#iletisim">İletişim</a>
+      <a href="#urunler"><span class="i18n" data-lang="tr">Ürünler</span><span class="i18n" data-lang="en" style="display:none">Products</span></a>
+      <a href="#hakkimizda"><span class="i18n" data-lang="tr">Hakkımızda</span><span class="i18n" data-lang="en" style="display:none">About</span></a>
+      <a href="#iade"><span class="i18n" data-lang="tr">İade Politikası</span><span class="i18n" data-lang="en" style="display:none">Refund Policy</span></a>
+      <a href="#kullanim-sartlari"><span class="i18n" data-lang="tr">Kullanım Şartları</span><span class="i18n" data-lang="en" style="display:none">Terms of Service</span></a>
+      <a href="#gizlilik"><span class="i18n" data-lang="tr">Gizlilik</span><span class="i18n" data-lang="en" style="display:none">Privacy</span></a>
+      <a href="#iletisim"><span class="i18n" data-lang="tr">İletişim</span><span class="i18n" data-lang="en" style="display:none">Contact</span></a>
     </div>
-    <div style="color:var(--muted);font-size:13px;">© 2026 Liberyan. Tüm hakları saklıdır.</div>
+    <div style="color:var(--muted);font-size:13px;">
+      <span class="i18n" data-lang="tr">© 2026 Liberyan. Tüm hakları saklıdır.</span>
+      <span class="i18n" data-lang="en" style="display:none">© 2026 Liberyan. All rights reserved.</span>
+    </div>
   </div>
 </footer>
+
+<script>
+  function setLang(lang){
+    document.querySelectorAll('.i18n').forEach(function(el){
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    document.querySelectorAll('.amount').forEach(function(el){
+      el.textContent = lang === 'en' ? el.getAttribute('data-usd') : el.getAttribute('data-lira');
+    });
+    document.documentElement.lang = lang;
+    document.getElementById('lang-btn-tr').classList.toggle('active', lang === 'tr');
+    document.getElementById('lang-btn-en').classList.toggle('active', lang === 'en');
+    try { localStorage.setItem('liberyan-lang', lang); } catch(e) {}
+  }
+  (function(){
+    var saved = 'tr';
+    try { saved = localStorage.getItem('liberyan-lang') || 'tr'; } catch(e) {}
+    setLang(saved);
+  })();
+</script>
 
 </body>
 </html>
